@@ -1,4 +1,4 @@
-# Games API
+# Desafio-Full-Stack
 
 **Author:** Lucas Barbosa Dourado - @lucasbdourado
 
