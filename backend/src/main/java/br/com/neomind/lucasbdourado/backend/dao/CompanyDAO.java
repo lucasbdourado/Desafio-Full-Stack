@@ -1,8 +1,10 @@
 package br.com.neomind.lucasbdourado.backend.dao;
 
 import br.com.neomind.lucasbdourado.backend.domain.Company;
+import br.com.neomind.lucasbdourado.backend.exception.ValidationException;
 
 import javax.persistence.*;
+import java.sql.SQLException;
 import java.util.List;
 public class CompanyDAO implements ICompanyDAO{
 
@@ -26,12 +28,11 @@ public class CompanyDAO implements ICompanyDAO{
     }
 
     @Override
-    public Company create(Company company) throws Exception {
+    public Company create(Company company) throws ValidationException {
         try {
             openConnection();
 
-            if(isCnpjExists(company.getCnpj())) throw new Exception("O CNPJ informado já existe.");
-
+            if(isCnpjExists(company.getCnpj())) throw new ValidationException("O CNPJ informado já existe.");
 
             entityManager.persist(company);
             entityManager.getTransaction().commit();
@@ -39,14 +40,14 @@ public class CompanyDAO implements ICompanyDAO{
             closeConnection();
 
             return company;
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
+        } catch (ValidationException e){
+            throw new ValidationException(e.getMessage());
         }
 
     }
 
     @Override
-    public Company findById(Long id) throws Exception {
+    public Company findById(Long id) throws NoResultException {
         try {
             openConnection();
 
@@ -56,13 +57,13 @@ public class CompanyDAO implements ICompanyDAO{
             closeConnection();
 
             return company;
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
+        } catch (NoResultException e){
+            throw new NoResultException(e.getMessage());
         }
     }
 
     @Override
-    public Company update(Company company) throws Exception {
+    public Company update(Company company) throws NoResultException {
         try {
             openConnection();
 
@@ -72,13 +73,13 @@ public class CompanyDAO implements ICompanyDAO{
             closeConnection();
 
             return updatedCompany;
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
+        } catch (NoResultException e){
+            throw new NoResultException(e.getMessage());
         }
     }
 
     @Override
-    public Company delete(Company company) throws Exception {
+    public Company delete(Company company) throws NoResultException {
         try {
             openConnection();
 
@@ -90,17 +91,15 @@ public class CompanyDAO implements ICompanyDAO{
 
             return deletedCompany;
         } catch (NoResultException e) {
-            throw new Exception(e.getMessage());
+            throw new NoResultException(e.getMessage());
         }
     }
 
     public boolean isCnpjExists(String cnpj) {
         try {
-            Boolean isCnpjExists = entityManager.createQuery("SELECT COUNT(c) FROM Company c WHERE c.cnpj = :cnpj", Long.class)
+            return entityManager.createQuery("SELECT COUNT(c) FROM Company c WHERE c.cnpj = :cnpj", Long.class)
                     .setParameter("cnpj", cnpj)
                     .getSingleResult() > 0;
-
-            return isCnpjExists;
         } catch (NoResultException e) {
             return false;
         }

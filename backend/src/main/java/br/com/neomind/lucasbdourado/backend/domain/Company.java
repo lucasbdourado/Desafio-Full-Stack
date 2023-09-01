@@ -1,7 +1,7 @@
 package br.com.neomind.lucasbdourado.backend.domain;
 
 import br.com.neomind.lucasbdourado.backend.annotation.FieldValidation;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import br.com.neomind.lucasbdourado.backend.exception.ValidationException;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -72,13 +72,13 @@ public class Company implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public String formatCnpj(){
+    public String formatCnpj() {
         return cnpj.replaceFirst("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})", "$1.$2.$3/$4-$5");
     }
 
-    public Boolean validateEmail() throws Exception {
-        try{
-            String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+    public Boolean validateEmail() throws ValidationException {
+        try {
+            String regex = "^(?=.{1,256}$)(?=.{1,64}@.{1,255}$)[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
 
             Pattern pattern = Pattern.compile(regex);
 
@@ -87,15 +87,15 @@ public class Company implements Serializable {
             if (matcher.matches()) {
                 return true;
             } else {
-                throw new Exception("Por favor, informe um e-mail válido. Ex: neomind@teste.com");
+                throw new ValidationException("Por favor, informe um e-mail válido. Ex: neomind@teste.com");
             }
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
+        } catch (ValidationException e) {
+            throw new ValidationException(e.getMessage());
         }
     }
 
-    public Boolean validateCnpj() throws Exception {
-        try{
+    public Boolean validateCnpj() throws ValidationException {
+        try {
             String regex = "^\\d{2}(\\.\\d{3}){2}/\\d{4}-\\d{2}$|^\\d{14}$";
 
             Pattern pattern = Pattern.compile(regex);
@@ -107,10 +107,10 @@ public class Company implements Serializable {
 
                 return true;
             } else {
-                throw new Exception("Por favor, informe um cnpj válido. Ex: 00.000.000/000-00 ou 0000000000000");
+                throw new ValidationException("Por favor, informe um cnpj válido. Ex: 00.000.000/000-00 ou 0000000000000");
             }
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
+        } catch (ValidationException e) {
+            throw new ValidationException(e.getMessage());
         }
     }
 }
