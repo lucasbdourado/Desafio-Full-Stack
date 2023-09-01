@@ -23,7 +23,7 @@ public class CompanyResource {
         try{
             List<Company> companies = companyService.getAll();
 
-            return Response.status(Response.Status.FOUND).entity(companies).build();
+            return Response.status(Response.Status.OK).entity(companies).build();
         } catch (Exception e){
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
@@ -40,10 +40,10 @@ public class CompanyResource {
             if (createdCompany != null) {
                 return Response.status(Response.Status.CREATED).entity(createdCompany).build();
             } else {
-                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Teste").build();
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
             }
         }catch (Exception e){
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("{\"error\": \"" + e.getMessage() + "\"}").build();
         }
     }
 
@@ -60,7 +60,7 @@ public class CompanyResource {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("{\"error\": \"" + e.getMessage() + "\"}").build();
         }
     }
 
@@ -77,7 +77,7 @@ public class CompanyResource {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("{\"error\": \"" + e.getMessage() + "\"}").build();
         }
     }
 
@@ -95,7 +95,7 @@ public class CompanyResource {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("{\"error\": \"" + e.getMessage() + "\"}").build();
         }
     }
 

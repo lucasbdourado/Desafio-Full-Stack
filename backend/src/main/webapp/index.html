@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="container h-100">
+    <div ng-app="companyApp">
+        <h1>Fornecedores</h1>
+        <div ng-controller="CompanyController as controller">
+            <button class="btn btn-primary" data-ng-click="controller.showCreateForm()"
+                    type="button">Criar Compania
+            </button>
+
+            <form ng-show="controller.company && controller.displayForm">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Nome</label>
+                    <input aria-describedby="nameHelp" class="form-control" id="name" ng-model="controller.company.name"
+                           placeholder="Nome" type="text">
+                    <div class="form-text" id="nameHelp">Nome do fornecedor.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="email">E-Mail</label>
+                    <input aria-describedby="emailHelp" class="form-control" id="email"
+                           ng-model="controller.company.email"
+                           placeholder="E-Mail" type="email">
+                    <div class="form-text" id="emailHelp">E-Mail do Representante/Responsável do Fornecedor.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="comment">Comentário</label>
+                    <input aria-describedby="commentHelp" class="form-control" id="comment"
+                           ng-model="controller.company.comment"
+                           placeholder="Comentário" type="text">
+                    <div class="form-text" id="commentHelp">Comentário. Ex: Mercadorias, vendas, valores</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="cnpj">CNPJ</label>
+                    <input PLACEHOLDER="00.000.000/0001-15" aria-describedby="cnpjHelp" class="form-control" id="cnpj"
+                           ng-model="controller.company.cnpj" type="text">
+                    <div class="form-text" id="cnpjHelp">CNPJ do Fornecedor</div>
+                </div>
+
+                <button class="btn btn-primary" ng-if="controller.company.id" data-ng-click="controller.update(controller.company)">Editar</button>
+                <button class="btn btn-primary" ng-if="!controller.company.id" data-ng-click="controller.create()">Criar</button>
+                <button class="btn btn-dark" data-ng-click="controller.hideForm()">Cancelar</button>
+            </form>
+            <div ng-show="!controller.company">
+                <table class="table table-striped table-bordered mt-4">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Comment</th>
+                        <th>CNPJ</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody ng-show="controller.companies.length > 0">
+                    <tr ng-repeat="company in controller.companies">
+                        <td>{{ company.id }}</td>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.email }}</td>
+                        <td>{{ company.comment }}</td>
+                        <td>{{ company.cnpj }}</td>
+                        <td style="display: flex; width: 100%; justify-content: center; gap: 8px">
+                            <button class="btn btn-warning" data-ng-click="controller.showUpdateForm(company)"
+                                    type="button">Alterar
+                            </button>
+                            <button class="btn btn-danger" data-ng-click="controller.delete(company)" type="button">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/angular.min.js"></script>
+<script src="js/company.js"></script>
+</body>
+</html>
