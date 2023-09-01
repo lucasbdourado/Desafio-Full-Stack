@@ -63,9 +63,11 @@ public class CompanyDAO implements ICompanyDAO{
     }
 
     @Override
-    public Company update(Company company) throws NoResultException {
+    public Company update(Company company) throws ValidationException {
         try {
             openConnection();
+
+            if(isCnpjExists(company.getCnpj())) throw new ValidationException("O CNPJ informado já existe.");
 
             Company updatedCompany = entityManager.merge(company);
             entityManager.getTransaction().commit();
@@ -73,8 +75,8 @@ public class CompanyDAO implements ICompanyDAO{
             closeConnection();
 
             return updatedCompany;
-        } catch (NoResultException e){
-            throw new NoResultException(e.getMessage());
+        } catch (ValidationException e){
+            throw new ValidationException(e.getMessage());
         }
     }
 

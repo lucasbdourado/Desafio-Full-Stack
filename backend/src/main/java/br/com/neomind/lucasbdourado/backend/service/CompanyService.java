@@ -69,7 +69,7 @@ public class CompanyService extends FieldsValidator<Company> implements ICompany
         } catch (NoResultException noResultException){
             throw new NoResultException(noResultException.getMessage());
         } catch (ValidationException validationException) {
-            throw new ValidationException(validationException.getMessage());
+            throw validationException;
         }
     }
 

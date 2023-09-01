@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "ef45a7c7-1d47-48d6-afd5-c7367a709f6e",
+		"name": "Company API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "19694509"
+	},
+	"item": [
+		{
+			"name": "List All Companies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/backend_war_exploded/api/company/"
+			},
+			"response": []
+		},
+		{
+			"name": "Show Company",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/backend_war_exploded/api/company/2"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Company",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Lucas Dourado\",\r\n    \"email\": \"lucasdourado@teste.com\",\r\n    \"comment\": \"Teste de Comentario\",\r\n    \"cnpj\": \"42992772000114\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/backend_war_exploded/api/company/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"backend_war_exploded",
+						"api",
+						"company",
+						"create"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "teste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Company",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Lucas Dourado\",\r\n    \"email\": \"lucasdourado@teste.com\",\r\n    \"comment\": \"Teste de Comentario\",\r\n    \"cnpj\": \"42992772000114\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/backend_war_exploded/api/company/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"backend_war_exploded",
+						"api",
+						"company",
+						"1"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "teste",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Company",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/backend_war_exploded/api/company/2"
+			},
+			"response": []
+		}
+	]
+}

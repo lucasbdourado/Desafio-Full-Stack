@@ -15,7 +15,7 @@ public interface ICompanyDAO {
 
     Company findById(Long id) throws NoResultException;
 
-    Company update(Company company) throws NoResultException;
+    Company update(Company company) throws ValidationException;
 
     Company delete(Company company) throws NoResultException;
 }

@@ -47,7 +47,7 @@ angular.module("companyApp", []).value('baseUrl', `http://localhost:8080/backend
             self.refreshPage();
             window.location.reload();
         }).catch(function errorCallback(response) {
-            alert("Erro! confira o log para ter mais informações")
+            alert(response.data.error)
         });
     }
 
