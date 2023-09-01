@@ -25,7 +25,7 @@ Obs: Foi incluido o arquivo com os Endpoints do Postman com todas configuraçõe
 
 Utilizar o Apache Tomcat 9.0 para configurar a execução da Application. Utilizar o arquivo de empacotamento gerado pelo maven "backend:war exploded" para realizar o deployment na configuração do servidor local do Apache Tomcat 9.0.
 
-- Criar um Banco de Dados com nome: "neomind"
+- Criar um Banco de Dados com nome "neomind".
 
 - URL: http://localhost:8080/backend_war_exploded/api/company/
 
