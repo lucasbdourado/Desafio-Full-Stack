@@ -1,44 +1,155 @@
-# Desafio-Full-Stack
+# Full Stack Challenge
 
-**Author:** Lucas Barbosa Dourado - @lucasbdourado
+A full-stack company management application built with **Java EE** and **AngularJS**.
 
-Desefio Full Stack em Java EE 8. O objetivo do desafio é montar um sistema desde o Back-End utilizando tecnologias do Java EE. No meu desafio eu utilizei o Jax-RS para criação da API e AngularJS 1.8 para o Front-End.
+The project includes a REST API for company management, a Single Page Application for consuming the API, and an additional Java logic challenge.
 
-## Tecnologias Utilizadas
+## Tech Stack
 
-- Java 11
-- Java EE 8 (Jax-RS, JPA/Hibernate)
-- AngularJS 1.8
-- Bootstrap
-- MySQL
-- Apache Tomcat 9.0
+### Backend
 
-## Estrutura do Projeto e Requisitos do Desafio
+* Java
+* Java EE 8
+* JAX-RS
+* JPA / Hibernate
+* Jersey
+* MySQL
+* Maven
 
-1. Back-End(API de Fornecedores) - Localizado na pasta Back-End. https://github.com/lucasbdourado/Desafio-Full-Stack/tree/master/backend/src/main/java/br/com/neomind/lucasbdourado/backend
-2. Front-End(Consumo de API - SPA) - Localizado na pasta Back-End https://github.com/lucasbdourado/Desafio-Full-Stack/tree/master/backend/src/main/webapp
-3. Relógio(Desafio de Lógica utilizando Java) - Localizado na pasta Relogio https://github.com/lucasbdourado/Desafio-Full-Stack/tree/master/relogio
+### Frontend
 
-Obs: Foi incluido o arquivo com os Endpoints do Postman com todas configurações incluidadas para realização do teste de endpoints e validações.
+* AngularJS 1.8
+* Bootstrap
+* HTML
+* CSS
+* JavaScript
 
-## Instruções para Testes:
+### Server
 
-Utilizar o Apache Tomcat 9.0 para configurar a execução da Application. Utilizar o arquivo de empacotamento gerado pelo maven "backend:war exploded" para realizar o deployment na configuração do servidor local do Apache Tomcat 9.0.
+* Apache Tomcat 9
 
-- Criar um Banco de Dados com nome "neomind".
+## Architecture
 
-- URL: http://localhost:8080/backend_war_exploded/api/company/
+```text
+AngularJS SPA
+     ↓
+REST API
+     ↓
+Service
+     ↓
+DAO
+     ↓
+JPA / Hibernate
+     ↓
+MySQL
+```
 
-Caso seja necessário utilizar o arquivo do postman disponibilizado para realizar os testes de endpoints.
+## Features
 
-## Preview
+* Company management
+* Create, read, update and delete operations
+* REST API
+* Data validation
+* MySQL persistence
+* AngularJS SPA
+* Layered backend architecture
 
-Aplicação Full Stack(Java EE + AngularJS):
-<img src="https://github.com/lucasbdourado/Desafio-Full-Stack/assets/44330434/00d35dbc-9b77-4cf5-8398-c4d05445f973">
+## API
 
-Relógio:
+Base path:
 
-<img src="https://github.com/lucasbdourado/Desafio-Full-Stack/assets/44330434/e927138a-ec16-49bf-bbdc-b73ed772a2a1">
+```text
+/api/company
+```
 
+### Get all companies
 
+```http
+GET /api/company
+```
 
+### Get company by ID
+
+```http
+GET /api/company/{id}
+```
+
+### Create company
+
+```http
+POST /api/company/create
+```
+
+### Update company
+
+```http
+PUT /api/company/{id}
+```
+
+### Delete company
+
+```http
+DELETE /api/company/{id}
+```
+
+## Project Structure
+
+```text
+backend/
+├── src/main/java
+│   ├── resource
+│   ├── service
+│   ├── dao
+│   ├── domain
+│   └── validation
+│
+└── src/main/webapp
+    ├── index.html
+    └── js
+
+relogio/
+└── Java logic challenge
+```
+
+## How to Run
+
+Create a MySQL database:
+
+```sql
+CREATE DATABASE neomind;
+```
+
+Build the backend:
+
+```bash
+cd backend
+./mvnw clean package
+```
+
+On Windows:
+
+```bash
+mvnw.cmd clean package
+```
+
+Deploy the generated WAR to **Apache Tomcat 9**.
+
+The application can then be accessed through Tomcat, with the API available under:
+
+```text
+/api/company
+```
+
+## Postman
+
+A Postman collection is included in the repository:
+
+```text
+Company API.postman_collection.json
+```
+
+It contains requests for testing the available API endpoints.
+
+## Additional Challenge
+
+The repository also contains a Java clock challenge inside the `relogio` directory.
